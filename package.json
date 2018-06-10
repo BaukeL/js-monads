@@ -1,8 +1,8 @@
 {
   "name": "bl-js-monads",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Some monads for javascript",
-  "main": "",
+  "main": "dist/main.js",
   "scripts": {
     "build": "babel src --out-dir dist --source-maps",
     "watch": "babel src --out-dir dist --watch --source-maps",

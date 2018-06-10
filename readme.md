@@ -5,7 +5,7 @@
 Usage:
 ```javascript
 
-import Option from 'option';
+import { Option } from 'bl-js-monads';
 
 // Basic value
 
@@ -73,7 +73,7 @@ console.log (opt7.value())  // BOE-BA
 Usage:
 ```javascript
 
-import Try from 'try';
+import { Try } from 'bl-js-monads';
 
 // Basic value
 
