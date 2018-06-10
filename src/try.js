@@ -35,7 +35,6 @@ const failure = errorText => {
 const ofFailable = getter => {
 
     const getValue = () => {
-        console.log ('getting value')
         try {
             return succesfull (getter());
         } catch (error) {

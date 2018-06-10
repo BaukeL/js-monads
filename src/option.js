@@ -1,10 +1,16 @@
 const isNone = value => value == null
 const isSome = value => !isNone(value)
 
+const noValueErrorText = 'Option has no value';
+
 const none = {
     isSome : false,
     isNone : true,
-    value  : () => { throw new Error("Option has no value") }
+
+    value  : () => { throw noValueErrorText },
+
+    flatMap : mapper => none,
+    map     : mapper => none
 }
 
 const flatMapper = value => mapper => {
@@ -16,15 +22,14 @@ const flatMapper = value => mapper => {
 
 const option = value => {
 
+    if (value == null) { return none; }
+
     return {
 
         isSome : isSome (value),
         isNone : isNone (value),
 
-        value  : () => {
-            if (isNone (value)) { throw "Option has no value" }
-            return value;
-        },
+        value  : () => value,
 
         flatMap : flatMapper (value),
         map     : mapper => flatMapper (value) (v => option (mapper (v)))
