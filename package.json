@@ -1,14 +1,14 @@
 {
-  "name": "-jsmonads",
+  "name": "bl-js-monads",
   "version": "0.0.1",
-  "description": "",
+  "description": "Some monads for javascript",
   "main": "",
   "scripts": {
     "build": "babel src --out-dir dist --source-maps",
     "watch": "babel src --out-dir dist --watch --source-maps",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "BaukeL",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.26.0",
