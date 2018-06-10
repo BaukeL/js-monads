@@ -95,11 +95,8 @@ try {
 
 const try3 = Try.ofFailable (() => 'BA')
 
-try {
-    try2.get()
-} catch (e) {
-    console.error (e)  // Result: Some error
-}
+console.log (try3.get())  // BA
+
 
 const try4 = Try.ofFailable (() => { throw 'Some error' })
 
