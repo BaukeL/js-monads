@@ -71,3 +71,33 @@ test (`Option with value 'BOE' mapped to 'BOE' + '-BA' shouldn't be none`, () =>
     expect (Option.of('BOE').map (v => `${v}-BA`).isNone)
     .toBeFalsy ()
 )
+
+// Flatmapping
+
+test (`Option with value 'BOE' mapped to option with 'BOE' + '-BA' should say 'BOE-BA'`, () => 
+    expect (Option.of('BOE').flatMap (v => Option.of(`${v}-BA`)).value())
+    .toBe ('BOE-BA')
+)
+
+test (`Option with value 'BOE' mapped to 'BOE' + '-BA' should be some`, () => 
+    expect (Option.of('BOE').flatMap (v => Option.of(`${v}-BA`)).isSome)
+    .toBeTruthy ()
+)
+
+test (`Option with value 'BOE' mapped to 'BOE' + '-BA' shouldn't be none`, () => 
+    expect (Option.of('BOE').flatMap (v => Option.of(`${v}-BA`)).isNone)
+    .toBeFalsy ()
+)
+
+// Mapping of none
+
+test (`None mapped to 'BOE' + '-BA' should not be some`, () => 
+    expect (Option.none.map (v => `${v}-BA`).isSome)
+    .toBeFalsy ()
+)
+
+test (`None mapped to 'BOE' + '-BA' should be none`, () => 
+    expect (Option.none.map (v => `${v}-BA`).isNone)
+    .toBeTruthy ()
+)
+
