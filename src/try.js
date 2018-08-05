@@ -10,7 +10,7 @@ const succesfull = value => {
         map     : mapper => ofFailable (() => mapper (value)),
 
         onSuccess : fn => { fn(value); return succesfull (value) },
-        ofFailure : __ => succesfull (value),
+        onFailure : __ => succesfull (value),
 
         toOption  : () => Option.of (value)
     }
@@ -26,7 +26,7 @@ const failure = errorText => {
         map     : __ => failure (errorText),
 
         onSuccess : __ => failure (errorText),
-        ofFailure : fn => { fn(errorText); return failure (errorText) },
+        onFailure : fn => { fn(errorText); return failure (errorText) },
 
         toOption  : () => Option.none
     }
@@ -46,11 +46,11 @@ const ofFailable = getter => {
 
         get : () => getValue().get(),
 
-        flatMap : mapper => mapper (getValue()),
+        flatMap : mapper => mapper (getValue().get()),
         map     : mapper => ofFailable (() => mapper (getValue().get())),
 
         onSuccess : fn => getValue().onSuccess (fn),
-        ofFailure : fn => getValue().ofFailure (fn),
+        onFailure : fn => getValue().onFailure (fn),
 
         toOption  : getValue().toOption
     }

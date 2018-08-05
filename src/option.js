@@ -18,9 +18,9 @@ const flatMapper = value => mapper => {
     if (isNone (value)) return none;
 
     return mapper (value);
-} 
+}
 
-const option = value => {
+const option = (value: T) => {
 
     if (value == null) { return none; }
 

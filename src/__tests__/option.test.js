@@ -1,4 +1,4 @@
-import Option from './option';
+import Option from '../option';
 
 // Basic value
 
@@ -74,19 +74,24 @@ test (`Option with value 'BOE' mapped to 'BOE' + '-BA' shouldn't be none`, () =>
 
 // Flatmapping
 
-test (`Option with value 'BOE' mapped to option with 'BOE' + '-BA' should say 'BOE-BA'`, () => 
+test (`Option with value 'BOE' flat mapped to option with 'BOE' + '-BA' should say 'BOE-BA'`, () => 
     expect (Option.of('BOE').flatMap (v => Option.of(`${v}-BA`)).value())
     .toBe ('BOE-BA')
 )
 
-test (`Option with value 'BOE' mapped to 'BOE' + '-BA' should be some`, () => 
+test (`Option with value 'BOE' flat mapped to 'BOE' + '-BA' should be some`, () => 
     expect (Option.of('BOE').flatMap (v => Option.of(`${v}-BA`)).isSome)
     .toBeTruthy ()
 )
 
-test (`Option with value 'BOE' mapped to 'BOE' + '-BA' shouldn't be none`, () => 
+test (`Option with value 'BOE' flat mapped to 'BOE' + '-BA' shouldn't be none`, () => 
     expect (Option.of('BOE').flatMap (v => Option.of(`${v}-BA`)).isNone)
     .toBeFalsy ()
+)
+
+test (`None flat mapped to 'v + -BA' should be none`, () => 
+    expect (Option.none.flatMap (v => Option.of(`${v}-BA`)).isNone)
+    .toBeTruthy ()
 )
 
 // Mapping of none

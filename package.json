@@ -4,17 +4,21 @@
   "description": "Some monads for javascript",
   "main": "dist/main.js",
   "scripts": {
-    "build": "babel src --out-dir dist --source-maps",
-    "watch": "babel src --out-dir dist --watch --source-maps",
-    "test": "jest"
+    "build": "babel src --ignore __tests__ --out-dir dist --source-maps",
+    "watch": "babel src --ignore __tests__ --out-dir dist --watch --source-maps",
+    "test": "jest --coverage",
+    "flow": "flow"
   },
   "author": "BaukeL",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
+    "babel-jest": "^23.4.0",
     "babel-preset-env": "^1.7.0",
-    "jest": "^23.1.0"
+    "babel-preset-flow": "^6.23.0",
+    "flow-bin": "^0.76.0",
+    "jest": "^23.4.0"
   },
   "dependencies": {
     "lodash": "^4.17.10"

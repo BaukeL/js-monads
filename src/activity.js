@@ -1,4 +1,6 @@
-import flow from 'lodash/fp/flow'
+import flow from 'lodash/fp/flow';
+
+import Try from './try';
 
 let nthActivity = 0
 const getNewActivityNr = () => {
@@ -6,12 +8,8 @@ const getNewActivityNr = () => {
     return nthActivity
 }
 
-const state = (data, context) => {
-    return {
-        data,
-        context
-    }
-}
+const state = (data, context) => { return { data, context } }
+
 const getNewStateData = stateSetter => flow (
     context => stateSetter (context),
     state   => state.data
@@ -20,18 +18,13 @@ const getNewStateData = stateSetter => flow (
 const context = ()   => activity (getNewActivityNr()) (context => state (context, context))
 const unit    = data => activity (getNewActivityNr()) (context => state (data, context))
 
-const tag = tagger => v => {
-    tagger(v)
-    return v
-}
-
 // Activity<T, C> 
 // stateSetter : C => State<T, C>
 // flatMap     : (mapper : T => Activity<T2, C>) : Activity<T2, C>
 // map         : (mapper : T => T2) : Activity<T2, C>
 const actor = nth => stateSetter => runner => {
 
-    const flatMapper = nth => stateSetter => mapper => 
+    const flatMapper = stateSetter => mapper => 
         actor 
             (getNewActivityNr()) 
             (context => flow (
@@ -41,12 +34,11 @@ const actor = nth => stateSetter => runner => {
             ) (context))
             (runner)
 
-    console.log (`Create   : ${nth}`)
     return {
         type    : 'normal',
         nth     : nth,
-        flatMap : mapper => flatMapper (nth) (stateSetter) (mapper),
-        map     : mapper => flatMapper (nth) (stateSetter) (v => unit (mapper (v))),
+        flatMap : mapper => flatMapper (stateSetter) (mapper),
+        map     : mapper => flatMapper (stateSetter) (v => unit (mapper (v))),
         run     : runner (stateSetter)
     }
 }
